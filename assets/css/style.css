@@ -1,0 +1,23 @@
+body {
+    background-color: #eee;
+}
+
+main {
+    margin-top: 30px;
+}
+
+.navbar {
+    background-color: #ffebae;
+}
+
+.navbar a {
+    color: #000;
+}
+
+.navbar a:hover {
+    color: #888;
+}
+
+.tam_table {
+    font-size: 14px;
+}
