@@ -1,7 +1,7 @@
-<?php require('config/database.php'); ?>
-<?php require_once('inc/header.php'); ?> 
+<?php require('../config/database.php'); ?>
+<?php require_once('../inc/header.php'); ?> 
 <?php //  require_once('config/session.php'); ?>
-<?php require_once('inc/navbar.php'); ?>
+<?php require_once('../inc/navbar.php'); ?>
 
 <?php 
 $sql = "SELECT COUNT(*) as count_turmas FROM turmas";
@@ -52,4 +52,4 @@ $count_turmas = $res->fetchColumn();
   </div>
   </div>
 </main>
-<?php require_once('inc/footer.php'); ?>
+<?php require_once('../inc/footer.php'); ?>

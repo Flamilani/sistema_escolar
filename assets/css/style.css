@@ -7,7 +7,9 @@ main {
 }
 
 .navbar {
-    background-color: #ffebae;
+    background-color: green;
+    border-bottom: 15px solid #0e461b;
+    color: #FFF;
 }
 
 .navbar a {
@@ -18,6 +20,46 @@ main {
     color: #888;
 }
 
+.drop-image {
+    position: absolute;
+    top: 85px;
+    left: -80px;
+    -webkit-box-shadow: 6px 4px 21px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 6px 4px 21px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 6px 4px 21px -8px rgba(0, 0, 0, 0.75);
+}
+
+.btn-sair {
+    margin: 10px;
+    margin-bottom: 0px;
+    width: auto;
+}
+
+.logo-ines {
+    height: auto;
+    width: 80px;
+}
+
+.img-peq {
+    height: auto;
+    width: 80px;
+    border: 3px solid #FFF;
+}
+
 .tam_table {
     font-size: 14px;
+}
+
+.form-sign {
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
 }

@@ -1,19 +1,27 @@
 <nav class="navbar navbar-expand-lg navbar-light">
 <div class="container">
-<a class="btn btn-danger btn-lg text-white" href="index.php">
-    SAE
+<a class="navbar-brand" href="<?= BASE;?>index.php">
+    <img class="logo-ines" src="<?= BASE;?>assets/imgs/logo_ines.png" alt="Logo INES" /> 
+    <span class="ml-2 text-white">INES / DEBASI</span>
   </a>
-  <div class="text-center">
-      Divisão de Registro Escolar <br />
-    Sistema de Administração Escolar
-</div>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+
+<!--   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button>
+  </button> -->
   <div class="my-2 my-sm-0">
-        <a class="btn btn-link" href="conteudos.php">Conteúdos</a>
-        <a class="btn btn-link" href="alunos.php">Alunos</a>
-        <a class="btn btn-link" href="presencas.php">Presenças</a>
+  
+      <div class="dropdown show">
+  <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <img src="<?= BASE;?>assets/imgs/figura.jpg" class="float-right rounded-circle img-peq" alt="Perfil">
+  </a>
+
+  <div class="dropdown-menu drop-image" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" href="#">Meu Perfil</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="btn btn-danger text-white btn-block btn-sair" href="<?= BASE; ?>logout.php">Sair</a>
+  </div>
+</div>
     </div>
 
 
