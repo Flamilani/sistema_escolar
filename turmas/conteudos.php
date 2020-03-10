@@ -1,6 +1,6 @@
 <?php require('../config/database.php'); ?>
 <?php require_once('../inc/header.php'); ?> 
-<?php // require_once('../config/session.php'); ?>
+<?php require_once('../config/session.php'); ?>
 <?php require('../helper/functions.php') ?>
 <?php require_once('../inc/navbar.php'); ?>
 

@@ -1,6 +1,6 @@
 <?php require('../config/database.php'); ?>
 <?php require_once('../inc/header.php'); ?> 
-<?php // require_once('../config/session.php'); ?>
+<?php require_once('../config/session.php'); ?>
 <?php require_once('../inc/navbar.php'); ?>
 
 <?php 
@@ -48,15 +48,6 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
     </tr>
   </thead>
   <tbody>
-  <tr>
-  <th scope="row">801</th>
-              <td> <a href="<?php BASE; ?>alunos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Alunos <span class="badge badge-light"> <?php echo $count_alunos; ?></span></a></td>
-              <td> <a href="aulas.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Aulas <span class="badge badge-light"> <?php echo $count_conteudos; ?> </span></a></td>
-              <td> <a href="conteudos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Conteudos <span class="badge badge-light"> <?php echo $count_conteudos; ?> </span></a></td>
-              <td> <a data-toggle="tooltip" title="Editar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-info" href="editar_turma.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
-      <a onclick="return confirmDelete('turma', <?php echo $turma['titulo']; ?>)" data-toggle="tooltip" title="Deletar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-danger" href="turma_excluir.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i>
-</a> </td>
-  </tr>
   <?php 
           $sql = "SELECT * FROM turmas";
           $qy = $pdo->query($sql);
@@ -71,6 +62,11 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
                 $res->execute();
                 $count_alunos = $res->fetchColumn();
 
+                $sqla = "SELECT COUNT(*) as count_aulas FROM plano_aula WHERE turma_id='$id'";
+                $resa = $pdo->prepare($sqla);
+                $resa->execute();
+                $count_aulas = $resa->fetchColumn();
+
                 $sqlc = "SELECT COUNT(*) as count_conteudos FROM conteudos WHERE turma_id='$id'";
                 $resc = $pdo->prepare($sqlc);
                 $resc->execute();
@@ -79,7 +75,7 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
                <tr>
               <th scope="row"><?php echo $turma["titulo"]; ?></th>
               <td> <a href="<?php BASE; ?>alunos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Alunos <span class="badge badge-light"> <?php echo $count_alunos; ?></span></a></td>
-              <td> <a href="aulas.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Aulas <span class="badge badge-light"> <?php echo $count_conteudos; ?> </span></a></td>
+              <td> <a href="aulas.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Aulas <span class="badge badge-light"> <?php echo $count_aulas; ?> </span></a></td>
               <td> <a href="conteudos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Conteudos <span class="badge badge-light"> <?php echo $count_conteudos; ?> </span></a></td>
               <td> <a data-toggle="tooltip" title="Editar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-info" href="editar_turma.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
       <a onclick="return confirmDelete('turma', <?php echo $turma['titulo']; ?>)" data-toggle="tooltip" title="Deletar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-danger" href="turma_excluir.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i>
