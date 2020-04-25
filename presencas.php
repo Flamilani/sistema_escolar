@@ -1,3 +1,4 @@
+<?php require_once('config/base.php'); ?>
 <?php require('config/database.php'); ?>
 <?php require_once('inc/header.php'); ?> 
 <?php require_once('inc/navbar.php'); ?>

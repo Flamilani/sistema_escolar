@@ -17,6 +17,24 @@
         }
       
     }
+
+    function painel($painel) {
+        switch ($painel) {
+            case 1:
+                return 'Administrativo';
+            break;
+            case 2:
+                return 'do Professor';
+            break;
+            case 3:
+                return 'do Aluno';
+            break;
+            default:
+            return 'Sem informação';
+            break;
+        }
+      
+    }
     
     function statusConteudo($status) {
         switch ($status) {

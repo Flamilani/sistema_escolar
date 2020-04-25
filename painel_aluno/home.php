@@ -1,9 +1,3 @@
-<?php require('../config/database.php'); ?>
-<?php require_once('../inc/header.php'); ?> 
-<?php require_once('../config/session.php'); ?>
-<?php require('../helper/functions.php') ?>
-<?php require_once('../inc/navbar.php'); ?>
-
 <?php 
       $id = 0;
 
@@ -21,6 +15,7 @@
         }
       ?>
 <main class="container">
+<h4>Painel <?php echo painel($_SESSION['nivel']); ?></h4> <hr />
 <div class="row">
   <div class="col-6 col-sm-3">
   <div class="card text-center">
@@ -34,12 +29,12 @@
   <div class="card">
   <div class="card-body">
   <h5 class="card-title"> <?php echo nivel($_SESSION['nivel']); ?>: <?php echo $_SESSION['nome']; ?></h5>
-    <h6 class="card-subtitle mb-2 text-muted">Turma  <?php echo $dado['titulo']; ?></h6>
+    <h6 class="card-subtitle mb-2 text-muted"> <?php echo (isset($dado['titulo']) && empty($dado['titulo']) == false ? 'Turma ' . $dado['titulo'] : 'Sem Turma') ; ?></h6>
     <p class="card-text"></p>
 
 
 
-    <a href="disciplinas.php" class="btn btn-success">Disciplinas <span class="badge badge-light">0</span></a>
+    <a href="<?= BASE; ?>/disciplinas.php" class="btn btn-success">Disciplinas <span class="badge badge-light">0</span></a>
   </div>
 </div>
   </div>

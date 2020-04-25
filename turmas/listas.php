@@ -1,6 +1,8 @@
+<?php require_once('config/base.php'); ?>
 <?php require('../config/database.php'); ?>
 <?php require_once('../inc/header.php'); ?> 
 <?php require_once('../config/session.php'); ?>
+<?php require('../helper/functions.php') ?>
 <?php require_once('../inc/navbar.php'); ?>
 
 <?php 
@@ -18,7 +20,7 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
 <main class="container">
 
 <div class="card">
-  <h5 class="card-header"><a href="../index.php" class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Inicial</a> Turmas</h5>
+  <h5 class="card-header"><a href="<?= BASE; ?>/index.php" class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Inicial</a> Turmas</h5>
   <div class="card-body">
     <div class="card-text">
     <form method="POST">
@@ -37,17 +39,8 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
   </div>
 </div>
 <br />
-<table class="table table-bordered bg-white text-center">
-  <thead>
-    <tr>
-      <th scope="col">Turmas</th>
-      <th scope="col">Alunos</th>
-      <th scope="col">Planos de Aula</th>
-      <th scope="col">Conteudos Trabalhados</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
+
+  <div class="row">
   <?php 
           $sql = "SELECT * FROM turmas";
           $qy = $pdo->query($sql);
@@ -72,20 +65,28 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
                 $resc->execute();
                 $count_conteudos = $resc->fetchColumn();
               ?>
-               <tr>
-              <th scope="row"><?php echo $turma["titulo"]; ?></th>
-              <td> <a href="<?php BASE; ?>alunos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Alunos <span class="badge badge-light"> <?php echo $count_alunos; ?></span></a></td>
-              <td> <a href="aulas.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Aulas <span class="badge badge-light"> <?php echo $count_aulas; ?> </span></a></td>
-              <td> <a href="conteudos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary">Conteudos <span class="badge badge-light"> <?php echo $count_conteudos; ?> </span></a></td>
-              <td> <a data-toggle="tooltip" title="Editar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-info" href="editar_turma.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
-      <a onclick="return confirmDelete('turma', <?php echo $turma['titulo']; ?>)" data-toggle="tooltip" title="Deletar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-danger" href="turma_excluir.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i>
-</a> </td>
-              </tr>  
+            
+  <div class="col-sm-3">
+    <div class="card mb-3">
+  <h5 class="card-header">Turma <?php echo $turma["titulo"]; ?>  
+     <a onclick="return confirmDelete('turma', <?php echo $turma['titulo']; ?>)" data-toggle="tooltip" title="Deletar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-danger btn-sm pull-right" href="turma_excluir.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a> 
+     <a data-toggle="tooltip" title="Editar turma <?php  echo $turma["titulo"]; ?>" class="btn btn-info btn-sm pull-right mr-2" href="editar_turma.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
+    </h5>
+    
+     <div class="card-body text-center">
+  <a href="<?= BASE; ?>/alunos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary btn-block">Alunos <span class="badge badge-light"> <?php echo $count_alunos; ?></span></a> <br />
+  <a href="<?= BASE; ?>/aulas.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary btn-block">Planos de Aulas <span class="badge badge-light"> <?php echo $count_aulas; ?> </span></a>  <br />
+  <a href="<?= BASE; ?>/conteudos.php?id=<?php echo $turma["id"]; ?>" class="btn btn-primary btn-block">Conteudos Trabalhados <span class="badge badge-light"> <?php echo $count_conteudos; ?> </span></a>
+
+  </div>
+</div>
+</div>
+
    <?php endforeach;
           endif;
   ?>    
- </tbody>
-</table>
+  </div>
+
 </main>
 
 <?php require_once('../inc/footer.php'); ?>
