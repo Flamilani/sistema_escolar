@@ -1,8 +1,8 @@
 <?php 
       $id = 0;
 
-      if(isset($_SESSION['id']) && empty($_SESSION['id']) == false) {
-        $id = addslashes($_SESSION['id']);
+      if(isset($_SESSION['cLogado']) && empty($_SESSION['cLogado']) == false) {
+        $id = addslashes($_SESSION['cLogado']);
  
           $sql = "SELECT * FROM turmas t INNER JOIN aluno_turma a on t.id = a.turma_id WHERE a.aluno_id = '$id'";
           $sql = $pdo->query($sql);

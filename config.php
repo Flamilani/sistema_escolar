@@ -1,5 +1,4 @@
 <?php
-
 define("BASE", "http://localhost/sistema_escolar");
 
 session_start();
@@ -7,7 +6,7 @@ session_start();
     $dsn = "mysql:dbname=base_escolar;host=localhost";
     $dbuser = "root";
     $dbpass = "123123";
-    $charset = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
+ //   $charset = array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8");
 
  /*    define("BASE", "http://milanidesigner.com.br/ines");
 

@@ -1,9 +1,8 @@
-<?php require_once('config/base.php'); ?>
-<?php require('../config/database.php'); ?>
-<?php require_once('../inc/header.php'); ?> 
-<?php require_once('../config/session.php'); ?>
-<?php require('../helper/functions.php') ?>
-<?php require_once('../inc/navbar.php'); ?>
+<?php require_once('inc/header.php'); ?> 
+<?php require_once('session.php'); ?>
+<?php require('helper/functions.php') ?>
+<?php require_once('inc/navbar.php'); ?> 
+
 
 <?php 
       $id = 0;
@@ -25,7 +24,7 @@
 <main class="container">
 
 <div class="card">
-  <h5 class="card-header"><a href="<?= BASE; ?>/listas.php" class="btn btn-primary">
+  <h5 class="card-header"><a href="<?= BASE; ?>/turmas.php" class="btn btn-primary">
   <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Turma <?php echo $dado['titulo']; ?></a> Alunos</h5>
   <div class="card-body">
     <div class="card-text">
@@ -80,4 +79,4 @@
 </table>
 </main>
 
-<?php require_once('../inc/footer.php'); ?>
+<?php require_once('inc/footer.php'); ?>

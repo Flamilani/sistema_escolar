@@ -1,11 +1,10 @@
 <?php 
+require('classes/turmas.class.php');
+           
+$turmas = new Turmas();
+$count_turmas = $turmas->countTurmas();
 
-$sql = "SELECT COUNT(*) as count_turmas FROM turmas";
-$res = $pdo->prepare($sql);
-$res->execute();
-$count_turmas = $res->fetchColumn();
 ?>
-
 <main class="container">
 <h4>Painel <?php echo painel($_SESSION['nivel']); ?></h4> <hr />
 <div class="row text-center">
@@ -14,7 +13,7 @@ $count_turmas = $res->fetchColumn();
   <i class="fa fa-users fa-5x text-primary" aria-hidden="true"></i>
   <div class="card-body">
 
-    <a href="<?= BASE; ?>/turmas/listas.php" class="btn btn-primary">Turmas 
+    <a href="<?= BASE; ?>/turmas.php" class="btn btn-primary">Turmas 
     <span class="badge badge-light">
     <?php echo $count_turmas; ?>
     </span></a>

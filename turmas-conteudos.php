@@ -1,9 +1,7 @@
-<?php require_once('config/base.php'); ?>
-<?php require('../config/database.php'); ?>
-<?php require_once('../inc/header.php'); ?> 
-<?php require_once('../config/session.php'); ?>
-<?php require('../helper/functions.php') ?>
-<?php require_once('../inc/navbar.php'); ?>
+<?php require_once('inc/header.php'); ?> 
+<?php require_once('session.php'); ?>
+<?php require('helper/functions.php') ?>
+<?php require_once('inc/navbar.php'); ?> 
 
 <?php 
       $id = 0;
@@ -23,17 +21,31 @@
       ?>
 
 <?php 
-if(isset($_POST['conteudo']) && empty($_POST['conteudo']) == false) {
+if(isset($_POST['conteudo']) && !empty($_POST['conteudo'])) {
   $conteudo = addslashes($_POST['conteudo']);
   $data = addslashes($_POST['datetimepicker1']);
   $status = addslashes($_POST['status']);
-  $id = addslashes($_GET['id']);
-  $prof_id = $_SESSION['id'];
+  $turma_id = addslashes($_GET['id']);
 
-  $sql = "INSERT INTO conteudos SET conteudo = '$conteudo', data_cont = '$data', status = '$status', turma_id = '$id', prof_id = '$prof_id'";
-  $pdo->query($sql); 
-
-  header("Location: conteudos.php?id=" . $id);
+  if(empty($conteudo) == false) {
+    if($turmas->insertConteudo(
+      $conteudo, 
+      $data, 
+      $status,      
+      $turma_id          
+      )) { ?>       
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Inserido com sucesso             
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+  <?php }
+} else { ?>
+    <div class="alert alert-warning">
+        Preencha todos os campos
+    </div>
+<?php }
   
 }
 ?>
@@ -42,7 +54,7 @@ if(isset($_POST['conteudo']) && empty($_POST['conteudo']) == false) {
 <main class="container">
 
 <div class="card">
-  <h5 class="card-header"> <a href="<?= BASE; ?>/listas.php" class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Turma <?php echo $dado['titulo']; ?></a> Conteúdos</h5>
+  <h5 class="card-header"> <a href="<?= BASE; ?>/turmas.php" class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Turma <?php echo $dado['titulo']; ?></a> Conteúdos</h5>
   <div class="card-body">
     <div class="card-text">
     <form method="POST">
@@ -101,4 +113,4 @@ if(isset($_POST['conteudo']) && empty($_POST['conteudo']) == false) {
 </table>
 </main>
 
-<?php require_once('../inc/footer.php'); ?>
+<?php require_once('inc/footer.php'); ?>

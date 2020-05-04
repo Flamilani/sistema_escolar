@@ -3,8 +3,8 @@
 <?php 
       $id = 0;
 
-      if(isset($_SESSION['id']) && empty($_SESSION['id']) == false) {
-        $id = addslashes($_SESSION['id']);
+      if(isset($_SESSION['cLogado']) && !empty($_SESSION['cLogado'])) {
+        $id = addslashes($_SESSION['cLogado']);
  
           $sql = "SELECT * FROM departamentos dp INNER JOIN usuarios u on dp.id = u.depart_id WHERE u.id = '$id'";
           $sql = $pdo->query($sql);
@@ -12,8 +12,6 @@
           if($sql->rowCount() > 0) {
             $dado = $sql->fetch();
               }
-        } else {
-          header("Location: index.php");
         }
       ?>
 <a class="navbar-brand" href="<?= BASE;?>/index.php">
