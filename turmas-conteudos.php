@@ -1,3 +1,4 @@
+<?php require("config.php"); ?>
 <?php require_once('inc/header.php'); ?> 
 <?php require_once('session.php'); ?>
 <?php require('helper/functions.php') ?>
@@ -28,7 +29,7 @@ if(isset($_POST['conteudo']) && !empty($_POST['conteudo'])) {
   $turma_id = addslashes($_GET['id']);
 
   if(empty($conteudo) == false) {
-    if($turmas->insertConteudo(
+    if(!$turmas->insertConteudo(
       $conteudo, 
       $data, 
       $status,      

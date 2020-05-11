@@ -1,3 +1,4 @@
+<?php require("config.php"); ?>
 <?php require_once('inc/header.php'); ?> 
 <?php require_once('session.php'); ?>
 <?php require('helper/functions.php') ?>

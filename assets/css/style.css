@@ -76,3 +76,14 @@ main {
 .modal-larg {
     max-width: 1500px;
 }
+
+.title_depart {
+    height: 50px;
+    font-size: 13px;
+}
+
+.form-aluno {
+    background-color: #afd5ff;
+    padding: 30px;
+    border-radius: 4%;
+}

@@ -6,19 +6,21 @@
 
 <main class="container">
 <?php
-require('classes/usuarios.class.php');
-$prof = new Usuarios();
+require('classes/alunos.class.php');
+$alunos = new Alunos();
 
 if(isset($_POST['nome']) && !empty($_POST['nome'])) {
     $nome = addslashes($_POST['nome']);
     $sobrenome = addslashes($_POST['sobrenome']);
     $email = addslashes($_POST['email']);
     $senha = md5($_POST['senha']);
+    $login = addslashes($_POST['login']);
+    $cpf = addslashes($_POST['cpf']);
     $celular = addslashes($_POST['celular']);
     $data_nasc = addslashes($_POST['datetimepicker1']);
 
     if(!empty($nome) && !empty($email) && !empty($senha)) {
-        if($prof->insertProfessor($nome, $sobrenome, $email, $senha, $celular, $data_nasc)) { ?>
+        if($alunos->insertAluno($nome, $sobrenome, $email, $senha, $login, $cpf, $celular, $data_nasc)) { ?>
 <div class="alert alert-success alert-dismissible fade show" role="alert">
 Cadastrado com sucesso             
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -26,8 +28,7 @@ Cadastrado com sucesso
 </div>
        <?php } else { ?>
         <div class="alert alert-warning">
-                <strong>Este usuário já existe!</strong> 
-                <a href="login.php" class="alert-link">Login</a>
+                <strong>Este aluno já existe!</strong>               
             </div>
       <?php }
     } else { ?>
@@ -40,7 +41,7 @@ Cadastrado com sucesso
 <div class="card">
   <h5 class="card-header"><a data-toggle="tooltip" title="Voltar à Inicial" href="<?= BASE; ?>/index.php" class="btn btn-primary">
   <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-</a> Professores</h5>
+</a> Alunos</h5>
   <div class="card-body">
     <div class="card-text">
     <form method="POST">
@@ -63,7 +64,19 @@ Cadastrado com sucesso
            <input type='text' name="datetimepicker1" class="form-control" id="datetimepicker1" />
            </div>
         </div>    
-     
+        <div class="col-6 col-md-4">
+        <div class="form-group">
+           <label class="card-title">Login</label>
+               <input type='text' class="form-control" name="login" id="login" />
+               </div>
+        </div>  
+        <div class="col-6 col-md-4">
+        <div class="form-group">
+           <label class="card-title">CPF</label>
+               <input type='text' class="form-control" name="cpf" id="cpf" />
+               </div>
+        </div>   
+ 
         <div class="col-6 col-md-4">
            <label class="card-title">Celular</label>
                <input type='text' class="form-control" name="celular" id="celular" />
@@ -86,33 +99,8 @@ Cadastrado com sucesso
 </div>
 <br />
 
+<?php if(count($alunos->getAlunos()) > 0) { ?>
   <div class="row">
-<!--   <?php 
-
-      $listarProfs = $prof->getProfessores();
-      foreach($listarProfs as $pf): ?>    
-  <div class="col-sm-3">
-    <div class="card mb-3">
-  <h5 class="card-header"><?php echo $pf["nome"]; ?> <?php echo $pf["sobrenome"]; ?>   
-     <a onclick="return confirmDelete('professor', <?php echo $pf['nome']; ?>)" 
-     data-toggle="tooltip" title="Deletar <?php  echo $pf["nome"]; ?>" class="btn btn-danger btn-sm pull-right" 
-     href="prof-excluir.php?id=<?php echo $pf["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a> 
-     <a data-toggle="tooltip" title="Editar <?php  echo $pf["nome"]; ?>" class="btn btn-info btn-sm pull-right mr-2" 
-     href="prof-editar.php?id=<?php echo $pf["id"]; ?>" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
-    </h5>
-    
-     <div class="card-body text-center">
-     <div class="border mx-auto mb-3 p-2"><i class="fa fa-user fa-5x text-secondary" aria-hidden="true"></i></div>
-     <div class="text-center mb-2"><?php echo $pf["nome"]; ?> <?php echo $pf["sobrenome"]; ?></div>
-     <div class="text-center mb-2"><?php echo (isset($pf["celular"]) && $pf["celular"] ? $pf["celular"] : 'Sem celular'); ?></div>
-     <div class="text-center mb-2"><?php echo $pf["email"]; ?></div>
-     <a href="<?= BASE; ?>/professor-ativar.php?id=<?php echo $pf["id"]; ?>" 
-     class="btn btn-success btn-block">Ativo</a> 
-    </div>
-</div>
-</div>
-
-   <?php endforeach; ?>    --> 
    <table class="table table-striped bg-white text-center">
   <thead>
     <tr>
@@ -120,6 +108,8 @@ Cadastrado com sucesso
       <th class="text-left" scope="col">Nome</th>
       <th scope="col">Foto</th>
       <th scope="col">Data Nasc.</th>
+      <th scope="col">Login</th>
+      <th scope="col">CPF</th>
       <th scope="col">Celular</th>
       <th scope="col">E-mail</th>
       <th scope="col">Senha</th>
@@ -128,32 +118,38 @@ Cadastrado com sucesso
     </tr>
   </thead>
   <tbody>
-  <?php $listarProfs = $prof->getProfessores();
-      foreach($listarProfs as $pf): ?>   
+  <?php $listarAlunos = $alunos->getAlunos();
+      foreach($listarAlunos as $alu): ?>   
     <tr>
-      <th scope="row"><?php echo $pf['id']; ?></th>
-      <td class="text-left"><?php echo $pf['nome']; ?> <?php echo $pf['sobrenome']; ?></td>
+      <th scope="row"><?php echo $alu['id']; ?></th>
+      <td class="text-left"><?php echo $alu['nome']; ?> <?php echo $alu['sobrenome']; ?></td>
       <td><div class="border bg-white mx-auto mb-3 p-2"><i class="fa fa-user fa-2x text-secondary" aria-hidden="true"></i></div></td>
-      <td><?php echo $pf['data_nasc']; ?></td>
-      <td><?php echo (isset($pf["celular"]) && $pf["celular"] ? $pf["celular"] : 'Sem celular'); ?></td>
-      <td><?php echo $pf['email']; ?></td>
-      <td><a href="<?= BASE; ?>/prof-senha.php?id=<?php echo $pf["id"]; ?>" 
+      <td><?php echo $alu['data_nasc']; ?></td>
+      <td><?php echo $alu['login']; ?></td>
+      <td><?php echo $alu['cpf']; ?></td>
+      <td><?php echo (isset($alu["celular"]) && $alu["celular"] ? $alu["celular"] : 'Sem celular'); ?></td>
+      <td><?php echo $alu['email']; ?></td>
+      <td><a href="<?= BASE; ?>/aluno-senha.php?id=<?php echo $alu["id"]; ?>" 
      class="btn btn-info btn-block btn-sm">Alterar Senha</a> </td>
      <td>
-     <a href="<?= BASE; ?>/prof-ativar.php?id=<?php echo $pf["id"]; ?>" 
-     data-toggle="tooltip" title="Mudar para <?php echo (isset($pf['status']) && $pf['status'] == 0 ? 'Ativo' : 'Inativo'); ?>"
-     class="btn btn-<?php echo (isset($pf['status']) && $pf['status'] == 1 ? 'success' : 'warning'); ?> btn-block btn-sm"><?php echo status($pf["status"]); ?></a>
+     <a href="<?= BASE; ?>/aluno-ativar.php?id=<?php echo $alu["id"]; ?>" 
+     data-toggle="tooltip" title="Mudar para <?php echo (isset($alu['status']) && $alu['status'] == 0 ? 'Ativo' : 'Inativo'); ?>"
+     class="btn btn-<?php echo (isset($alu['status']) && $alu['status'] == 1 ? 'success' : 'warning'); ?> btn-block btn-sm"><?php echo status($alu["status"]); ?></a>
      </td>
-     <td><a href="<?= BASE; ?>/prof-editar.php?id=<?php echo $pf["id"]; ?>" data-toggle="tooltip" title="Editar <?php echo $pf["nome"]; ?>"
+     <td><a href="<?= BASE; ?>/aluno-editar.php?id=<?php echo $alu["id"]; ?>" data-toggle="tooltip" title="Editar <?php echo $alu["nome"]; ?>"
      class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-     <a href="<?= BASE; ?>/prof-excluir.php?id=<?php echo $pf["id"]; ?>" data-toggle="tooltip" title="Remover <?php echo $pf["nome"]; ?>"
+     <a href="<?= BASE; ?>/aluno-excluir.php?id=<?php echo $alu["id"]; ?>" data-toggle="tooltip" title="Remover <?php echo $alu["nome"]; ?>"
      class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
     </tr>   
     <?php endforeach; ?>    
   </tbody>
 </table>
   </div>
-
+  <?php } else { ?>
+  <div class="alert alert-primary text-center" role="alert">
+  Nenhum aluno no momento.
+</div>
+<?php } ?>
 </main>
 
 <?php require_once('inc/footer.php'); ?>

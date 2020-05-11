@@ -22,11 +22,18 @@ $count_turmas = $turmas->countTurmas();
   </div>
   <div class="col-6 col-sm-3">
   <div class="card pt-3 mb-3">
-  <i class="fa fa-book fa-5x text-success" aria-hidden="true"></i>
-
+  <i class="fa fa-address-book-o fa-5x text-info" aria-hidden="true"></i>
   <div class="card-body">
-
-    <a href="<?php BASE; ?>/disciplinas.php" class="btn btn-success">Disciplinas <span class="badge badge-light">0</span></a>
+    <a href="<?= BASE; ?>/alunos.php" class="btn bg-info text-white">Alunos <span class="badge badge-light">0</span></a>
+  </div>
+</div>
+  </div>
+  <div class="col-6 col-sm-3">
+  <div class="card pt-3 mb-3">
+  <i class="fa fa-book fa-5x text-success" aria-hidden="true"></i>
+  <div class="card-body">
+    <a href="<?php BASE; ?>/disciplinas.php" class="btn btn-success">Disciplinas 
+    <span class="badge badge-light">0</span></a>
   </div>
 </div>
   </div>
@@ -34,7 +41,8 @@ $count_turmas = $turmas->countTurmas();
   <div class="card pt-3 mb-3">
   <i class="fa fa-list-alt fa-5x text-warning" aria-hidden="true"></i>
   <div class="card-body">
-    <a href="conteudos.php" class="btn btn-warning">Conteudos <span class="badge badge-light">0</span></a>
+    <a href="conteudos.php" class="btn btn-warning">Conteudos 
+    <span class="badge badge-light">0</span></a>
   </div>
 </div>
   </div>

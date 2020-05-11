@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light">
 <div class="container">
 <?php 
-      $id = 0;
 
       if(isset($_SESSION['cLogado']) && !empty($_SESSION['cLogado'])) {
         $id = addslashes($_SESSION['cLogado']);
@@ -33,7 +32,7 @@
   </a>
 
   <div class="dropdown-menu drop-image" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="#"><?php echo nivel($_SESSION['nivel']); ?> <?php echo $_SESSION['nome']; ?> </a>
+    <span class="dropdown-item"><?php echo $_SESSION['nome']; ?> <?php echo $_SESSION['sobrenome']; ?></span>
     <a class="dropdown-item" href="<?= BASE; ?>/perfil.php">Meu Perfil</a>
     <a class="btn btn-danger text-white btn-block btn-sair" href="<?= BASE; ?>/logout.php">Sair</a>
   </div>

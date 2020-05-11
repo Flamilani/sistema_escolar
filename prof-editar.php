@@ -7,7 +7,7 @@
 <main class="container">
 <?php 
 require('classes/usuarios.class.php');           
-$perfil = new Usuarios();
+$prof = new Usuarios();
 
 if(isset($_POST['nome']) && !empty($_POST['nome'])) {
     $nome = addslashes($_POST['nome']);
@@ -15,9 +15,9 @@ if(isset($_POST['nome']) && !empty($_POST['nome'])) {
     $email = addslashes($_POST['email']);
     $celular = addslashes($_POST['celular']);
     $data_nasc = addslashes($_POST['datetimepicker1']);
-    $id = $_SESSION['cLogado'];
+    $id = $_GET['id'];
 
-    $perfil->updatePerfil($nome, $sobrenome, $email, $celular, $data_nasc, $id); ?>
+    $prof->updateProfessor($nome, $sobrenome, $email, $celular, $data_nasc, $id); ?>
 
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         Atualizado com sucesso             
@@ -27,17 +27,17 @@ if(isset($_POST['nome']) && !empty($_POST['nome'])) {
 </div>
 <?php } 
 
-if(isset($_SESSION['cLogado']) && !empty($_SESSION['cLogado'])) {
-    $info = $perfil->getPerfil($_SESSION['cLogado']);
+if(isset($_GET['id']) && !empty($_GET['id'])) {
+    $info = $prof->getProfessor($_GET['id']);
 } else {
-    header("Location: index.php");
+    header("Location: professores.php");
 }
 
 ?>
 <div class="card">
-  <h5 class="card-header"><a data-toggle="tooltip" title="Voltar à Inicial" href="<?= BASE; ?>/index.php" class="btn btn-primary">
+  <h5 class="card-header"><a data-toggle="tooltip" title="Voltar para professores" href="<?= BASE; ?>/professores.php" class="btn btn-primary">
   <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-</a> Meu Perfil: <?php echo $info['nome']; ?> <?php echo $info['sobrenome']; ?></h5>
+</a> Editar <?php echo $info['nome']; ?> <?php echo $info['sobrenome']; ?></h5>
   <div class="card-body">
     <div class="card-text">
     <form method="POST">
@@ -68,11 +68,7 @@ if(isset($_SESSION['cLogado']) && !empty($_SESSION['cLogado'])) {
         <div class="col-6 col-md-4">
            <label class="card-title">E-mail</label>
                <input type='email' class="form-control" name="email" id="email" value="<?php echo $info['email']; ?>" />
-        </div>  
-        <div class="col-6 col-md-4">
-           <label class="card-title">Senha</label>
-           <a href="<?= BASE; ?>/prof-senha.php?id=<?php echo $info["id"]; ?>" class="btn btn-info btn-block">Alterar Senha</a>
-        </div>  
+        </div>   
       </div>
       <br />
     <input type="submit" class="btn btn-primary" value="Atualizar" />

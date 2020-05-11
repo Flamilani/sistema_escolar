@@ -20,9 +20,38 @@ class Turmas {
         global $pdo;
 
         $array = array();
-        $sql = $pdo->prepare("SELECT COUNT(*) as count_alunos FROM alunos WHERE turma_id = :id AND prof_id = :prof_id");
-        $sql->bindValue(":id", $id);
-        $sql->bindValue(":prof_id", $_SESSION['cLogado']);
+        $sql = $pdo->prepare("SELECT COUNT(*) as count_alunos FROM usuarios WHERE turma_id = :turma_id");
+        $sql->bindValue(":turma_id", $id);
+        $sql->execute();       
+
+        if($sql->rowCount() > 0) {
+            $array = $sql->fetchColumn();
+        }
+
+        return $array;
+    }
+
+    public function countPlanosAulas($id) {
+        global $pdo;
+
+        $array = array();
+        $sql = $pdo->prepare("SELECT COUNT(*) as count_aulas FROM plano_aula WHERE turma_id = :turma_id");
+        $sql->bindValue(":turma_id", $id);
+        $sql->execute();       
+
+        if($sql->rowCount() > 0) {
+            $array = $sql->fetchColumn();
+        }
+
+        return $array;
+    }
+
+    public function countConteudos($id) {
+        global $pdo;
+
+        $array = array();
+        $sql = $pdo->prepare("SELECT COUNT(*) as count_conteudos FROM conteudos WHERE turma_id = :turma_id");
+        $sql->bindValue(":turma_id", $id);
         $sql->execute();       
 
         if($sql->rowCount() > 0) {

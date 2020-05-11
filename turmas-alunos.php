@@ -1,3 +1,4 @@
+<?php require("config.php"); ?>
 <?php require_once('inc/header.php'); ?> 
 <?php require_once('session.php'); ?>
 <?php require('helper/functions.php') ?>
@@ -24,8 +25,11 @@
 <main class="container">
 
 <div class="card">
-  <h5 class="card-header"><a href="<?= BASE; ?>/turmas.php" class="btn btn-primary">
-  <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Turma <?php echo $dado['titulo']; ?></a> Alunos</h5>
+  <h5 class="card-header">
+  <a data-toggle="tooltip" title="Voltar para Turmas" href="<?= BASE; ?>/turmas.php" class="btn btn-primary">
+  <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+</a> Turma <?php echo $dado['titulo']; ?> - 
+Adicionar Alunos</h5>
   <div class="card-body">
     <div class="card-text">
     <form>

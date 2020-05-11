@@ -1,3 +1,4 @@
+<?php require("config.php"); ?>
 <?php require_once('inc/header.php'); ?> 
 <?php require_once('session.php'); ?>
 <?php require('helper/functions.php') ?>
@@ -9,10 +10,10 @@
 
 if(isset($_SESSION['nivel']) && $_SESSION['nivel'] == 1) {
 
-$sql = "SELECT COUNT(*) as count_depart FROM departamentos";
-$res = $pdo->prepare($sql);
-$res->execute();
-$count_depart = $res->fetchColumn();
+require('classes/home.class.php');           
+$home = new Home();
+$count_departs = $home->countDepartamentos();
+$count_funcionarios = $home->countFuncionarios();
 ?>
 
 <main class="container">
@@ -25,7 +26,7 @@ $count_depart = $res->fetchColumn();
 
     <a href="departamentos.php" class="btn btn-primary">Departamentos 
     <span class="badge badge-light">
-    <?php echo $count_depart; ?>
+    <?php echo $count_departs; ?>
     </span></a>
   </div>
 </div>
@@ -36,7 +37,10 @@ $count_depart = $res->fetchColumn();
 
   <div class="card-body">
 
-    <a href="<?= BASE; ?>/professores.php" class="btn btn-success">Professores <span class="badge badge-light">0</span></a>
+    <a href="<?= BASE; ?>/professores.php" class="btn btn-success">Professores 
+    <span class="badge badge-light">
+    <?php echo $count_funcionarios; ?>
+    </span></a>
   </div>
 </div>
   </div>

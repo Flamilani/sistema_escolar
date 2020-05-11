@@ -1,5 +1,20 @@
 <?php 
 
+    function status($status) {
+        switch ($status) {
+            case 0:
+                return 'Inativo';
+            break;
+            case 1:
+                return 'Ativo';
+            break;
+            default:
+            return 'Sem status';
+            break;
+        }
+    
+    }
+
     function nivel($nivel) {
         switch ($nivel) {
             case 1:

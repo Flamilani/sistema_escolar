@@ -1,8 +1,8 @@
-<?php require("config.php"); ?>
-<?php require('inc/header.php'); ?>
+<?php require("../config.php"); ?>
+<?php require('../inc/header.php'); ?>
 <main class="container form-sign">
 <?php
-require('classes/usuarios.class.php');
+require('../classes/usuarios.class.php');
 $usuario = new Usuarios();
 if(isset($_POST['email']) && !empty($_POST['email'])) {
     $email = addslashes($_POST['email']);
@@ -27,10 +27,10 @@ if(isset($_POST['email']) && !empty($_POST['email'])) {
     <?php }
 }
 ?>
-<div class="row text-center">
+<div class="row text-center form-aluno">
 <form class="form-signin" method="POST">
       <img class="logo-ines-login mb-4" src="<?= BASE;?>/assets/imgs/logo_ines.png" alt="Logo INES">
-      <h1 class="h3 mb-3 font-weight-normal">Acesso ao sistema</h1>
+      <h1 class="h3 mb-3 font-weight-normal">Acesso ao painel do aluno</h1>
       <label for="email" class="sr-only">E-mail</label>
       <input type="email" name="email" id="email" class="form-control mb-3" placeholder="E-mail" required autofocus>
       <label for="senha" class="sr-only">Senha</label>
@@ -42,4 +42,4 @@ if(isset($_POST['email']) && !empty($_POST['email'])) {
 </div>
 
 </main>
-    <?php require_once('inc/footer.php'); ?>
+    <?php require_once('../inc/footer.php'); ?>

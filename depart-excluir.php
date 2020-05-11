@@ -1,8 +1,7 @@
 <?php
-session_start();
-
-require_once('session.php');
 require('config.php');
+require_once('session.php');
+
 require('classes/departamentos.class.php');
 $depart = new Departamentos();
 
