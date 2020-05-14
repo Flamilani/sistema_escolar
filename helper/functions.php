@@ -54,7 +54,7 @@
     function statusConteudo($status) {
         switch ($status) {
             case 1:
-                return '<h4><span class="badge badge-pill badge-success">Concluido</span><h4>';
+                return '<h4><span class="badge badge-pill badge-success">Concluído</span><h4>';
             break;
             case 2:
                 return '<h4><span class="badge badge-pill badge-danger">Atrasado</span><h4>';

@@ -110,5 +110,32 @@ class Departamentos {
         return $array;
     }
 
+    public function getFuncionarioDepart($id) {
+        global $pdo;
+
+        $array = array();
+        $sql = $pdo->prepare("SELECT * FROM usuarios WHERE nivel = :nivel AND id = :id");
+        $sql->bindValue(":nivel", 2);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+        if($sql->rowCount() > 0) {
+            $array = $sql->fetch();
+        }
+
+        return $array;
+    }
+
+    public function deleteFuncionario($id) {
+
+        global $pdo;
+            
+        $sql = $pdo->prepare("UPDATE usuarios SET depart_id = :depart_id WHERE id = :id");
+        $sql->bindValue(":depart_id", 0);
+        $sql->bindValue(":id", $id);
+        $sql->execute();
+
+    }
+
 
 }

@@ -1,7 +1,15 @@
-function confirmDelete(title, id) {
+/* function confirmDelete(title, id) {
     alert('delete');
     return confirm('Tem certeza de que vai deletar ' + title + ' ' + id + '?');
+} */
+
+function confirmDelete() {
+    if (confirm("Tem certeza que vai remover?"))
+        return true;
+    else
+        return false;
 }
+
 
 $(document).ready(function() {
     $("#flip").click(function() {

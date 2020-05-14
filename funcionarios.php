@@ -34,7 +34,8 @@ $prof = new Usuarios();
 
 ?>
 <div class="card">
-  <h5 class="card-header"><a data-toggle="tooltip" title="Voltar para Departamentos" 
+  <h5 class="card-header">
+    <a data-toggle="tooltip" title="Voltar para Departamentos" 
   href="<?= BASE; ?>/departamentos.php" class="btn btn-primary">
   <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
 </a> <?php echo $depart['sigla']; ?> - <?php echo $depart['departamento']; ?></h5>
@@ -72,9 +73,9 @@ $prof = new Usuarios();
   <div class="col-sm-3">
     <div class="card mb-3">
   <h5 class="card-header"><?php echo $pf["nome"]; ?> <?php echo $pf["sobrenome"]; ?>   
-     <a onclick="return confirmDelete('professor', <?php echo $pf['nome']; ?>)" 
-     data-toggle="tooltip" title="Deletar <?php  echo $pf["nome"]; ?>" class="btn btn-danger btn-sm pull-right" 
-     href="prof-excluir.php?id=<?php echo $pf["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a> 
+     <a onclick="return confirmDelete()" 
+     data-toggle="tooltip" title="Remover <?php  echo $pf["nome"]; ?>" class="btn btn-danger btn-sm pull-right" 
+     href="funcionario-excluir.php?id=<?php echo $pf["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a> 
      <a data-toggle="tooltip" title="Editar <?php  echo $pf["nome"]; ?>" class="btn btn-info btn-sm pull-right mr-2" 
      href="prof-editar.php?id=<?php echo $pf["id"]; ?>" role="button"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> 
     </h5>
@@ -92,7 +93,7 @@ $prof = new Usuarios();
 
    <?php endforeach; ?>   
 
-  </div>
+
 
 </main>
 

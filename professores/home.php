@@ -1,8 +1,11 @@
 <?php 
-require('classes/turmas.class.php');
-           
+require('classes/turmas.class.php');           
 $turmas = new Turmas();
 $count_turmas = $turmas->countTurmas();
+
+require('classes/alunos.class.php');           
+$alunos = new Alunos();
+$count_alunos = $alunos->countAlunos();
 
 ?>
 <main class="container">
@@ -24,7 +27,10 @@ $count_turmas = $turmas->countTurmas();
   <div class="card pt-3 mb-3">
   <i class="fa fa-address-book-o fa-5x text-info" aria-hidden="true"></i>
   <div class="card-body">
-    <a href="<?= BASE; ?>/alunos.php" class="btn bg-info text-white">Alunos <span class="badge badge-light">0</span></a>
+    <a href="<?= BASE; ?>/alunos.php" class="btn bg-info text-white">Alunos 
+    <span class="badge badge-light">
+    <?php echo $count_alunos; ?>
+    </span></a>
   </div>
 </div>
   </div>

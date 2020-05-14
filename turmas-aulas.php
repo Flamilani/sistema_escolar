@@ -4,69 +4,41 @@
 <?php require('helper/functions.php') ?>
 <?php require_once('inc/navbar.php'); ?> 
 
-
-<?php 
-      $id = 0;
-
-      if(isset($_GET['id']) && empty($_GET['id']) == false) {
-        $id = addslashes($_GET['id']);
- 
-          $sql = "SELECT * FROM turmas WHERE id = '$id'";
-          $sql = $pdo->query($sql);
-  
-          if($sql->rowCount() > 0) {
-            $dado = $sql->fetch();
-          }
-        } else {
-          header("Location: turmas.php");
-        }
-      ?>
-
 <main class="container">
-<?php
-require('classes/turmas.class.php');
+<?php 
+require('classes/turmas.class.php');          
 $turmas = new Turmas();
-if(isset($_POST['tema']) && !empty($_POST['tema'])) {
-    $tema = addslashes($_POST['tema']);
-    $objetivo = addslashes($_POST['objetivo']);
-    $estrategias = addslashes($_POST['estrategias']);
-    $recursos = addslashes($_POST['recursos']);
-    $avaliacao = addslashes($_POST['avaliacao']);
-    $referencias = addslashes($_POST['referencias']);
-    $turma_id = addslashes($_GET['id']);
 
-    if(!empty($tema) && !empty($objetivo)) {
-        if($turmas->insertPlanoAula(
-          $tema, 
-          $objetivo, 
-          $estrategias, 
-          $recursos,
-          $avaliacao,
-          $referencias,
-          $turma_id          
-          )) { ?>       
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Inserido com sucesso             
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-       <?php } else { ?>
-        <div class="alert alert-warning">
-               Este plano de aula já existe!              
-            </div>
-      <?php }
-    } else { ?>
-        <div class="alert alert-warning">
-            Preencha todos os campos
-        </div>
-    <?php }
+if(isset($_GET['id']) && !empty($_GET['id'])) {
+  $turma = $turmas->getTurma($_GET['id']);
+} else {
+  header("Location: turmas.php");
 }
-?>
+
+if(isset($_POST['tema']) && !empty($_POST['tema'])) {
+  $tema = addslashes($_POST['tema']);
+  $objetivo = addslashes($_POST['objetivo']);
+  $estrategias = addslashes($_POST['estrategias']);
+  $recursos = addslashes($_POST['recursos']);
+  $avaliacao = addslashes($_POST['avaliacao']);
+  $referencias = addslashes($_POST['referencias']);
+  $turma_id = addslashes($_GET['id']);
+
+  $turmas->insertPlanoAula(
+    $tema, $objetivo, $estrategias, $recursos, $avaliacao, $referencias, $turma_id); ?>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        Aula inserida com sucesso             
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<?php } ?>
 <div class="card">
   <h5 class="card-header">
-  <a href="<?= BASE; ?>/turmas.php" class="btn btn-primary"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Turma <?php echo $dado['titulo']; ?></a> 
-  <button id="flip" class="btn btn-success">Inserir Planos de Aula</button></h5>
+  <a data-toggle="tooltip" title="Voltar para Turmas" href="<?= BASE; ?>/turmas.php" class="btn btn-primary">
+  <i class="fa fa-arrow-circle-left" aria-hidden="true"></i></a> Turma <?php echo $turma['titulo']; ?>
+  <button id="flip" class="btn btn-success ml-3">Inserir Planos de Aula</button></h5>
   <div id="panel" class="card-body">
     <div class="card-text">
     <form method="POST">
@@ -103,53 +75,42 @@ if(isset($_POST['tema']) && !empty($_POST['tema'])) {
   </div>
 </div>
 <br />
+<?php if(count($turmas->getPlanoAula($_GET['id'])) > 0) { ?>
 <table class="table table-bordered bg-white">
   <thead>
     <tr>
       <th class="text-center" scope="col">Tema</th>
       <th scope="col">Objetivo</th>
-      <th class="text-center"></th>
+      <th class="text-center">Ações</th>
     </tr>
   </thead>
   <tbody>
   <?php 
-              $listarPlano = $turmas->getPlanoAula();
+              $listarPlano = $turmas->getPlanoAula($_GET['id']);
 
               foreach($listarPlano as $plano): ?>
     <tr>
-      <th scope="row"><?php echo $plano["tema"]; ?></th>
+      <th class="text-center" scope="row"><?php echo $plano["tema"]; ?></th>
       <td><?php echo $plano["objetivo"]; ?></td>
-      <td class="text-center"><button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-modal-<?php echo $plano["id"]; ?>">Ver mais</button></td>
+      <td class="text-center width-size">
+      <a href="<?= BASE; ?>/turmas-aula-detalhe.php?id=<?php echo $plano["id"]; ?>" 
+      data-toggle="tooltip" title="Ver mais detalhe de <?php echo $plano["tema"]; ?>" class="btn btn-primary btn-sm">
+      <i class="fa fa-eye" aria-hidden="true"></i></a>
+      <a href="<?= BASE; ?>/turmas-aula-editar.php?id=<?php echo $plano["id"]; ?>" 
+      data-toggle="tooltip" title="Editar <?php echo $plano["tema"]; ?>"
+      class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+     <a onclick="return confirmDelete()" href="<?= BASE; ?>/turmas-aula-excluir.php?id=<?php echo $plano["id"]; ?>" data-toggle="tooltip" title="Remover <?php echo $plano["tema"]; ?>"
+     class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a>
+     </td>
     </tr> 
-    <div class="modal fade bd-modal-<?php echo $plano["id"]; ?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-larg">
-    <div class="modal-content">
-    <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Plano de Aula</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">    
-      <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4 border">.col-md-4</div>    
-    </div>
-    <div class="row">
-      <div class="col-md-4 border">.col-md-4</div>    
-    </div>
-    </div>
- 
-      </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-      </div>
-    </div>
-  </div>
-</div>  
     <?php endforeach; ?> 
   </tbody>
 </table>
+<?php } else { ?>
+  <div class="alert alert-primary text-center" role="alert">
+  Nenhum plano de aula no momento.
+</div>
+<?php } ?>
 </main>
 <!-- Large modal -->
 

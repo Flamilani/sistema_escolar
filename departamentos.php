@@ -59,7 +59,7 @@ if(isset($_POST['departamento']) && !empty($_POST['departamento'])) {
   <div class="col-sm-3">
     <div class="card mb-3">
   <h5 class="card-header"><?php echo $dp["sigla"]; ?>  
-     <a onclick="return confirmDelete('sigla', <?php echo $dp['sigla']; ?>)" data-toggle="tooltip" title="Remover <?php  echo $dp["sigla"]; ?>" 
+     <a onclick="return confirmDelete()" data-toggle="tooltip" title="Remover <?php  echo $dp["sigla"]; ?>" 
      class="btn btn-danger btn-sm pull-right" href="depart-excluir.php?id=<?php echo $dp["id"]; ?>" role="button">
      <i class="fa fa-trash" aria-hidden="true"></i></a> 
      <a data-toggle="tooltip" title="Editar <?php  echo $dp["sigla"]; ?>" 

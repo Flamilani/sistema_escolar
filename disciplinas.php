@@ -11,15 +11,11 @@ $turmas = new Turmas();
 
 if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
   $titulo = addslashes($_POST['titulo']);
-  $disciplina_id = addslashes($_POST['disciplina_id']);
-  $servico_id = addslashes($_POST['servico_id']);
-  $ano_id = addslashes($_POST['ano_id']);
-  $serie_id = addslashes($_POST['serie_id']);
 
   if(!empty($titulo)) {
-    if($turmas->insertTurma($titulo, $disciplina_id, $servico_id, $ano_id, $serie_id)) { ?>       
+    if($turmas->insertTurma($titulo)) { ?>       
         <div class="alert alert-success alert-dismissible fade show" role="alert">
-        Turma criada com sucesso             
+        Disciplina criada com sucesso             
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 <span aria-hidden="true">&times;</span>
 </button>
@@ -43,26 +39,10 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
     <div class="card-text">
     <form method="POST">
       <div class="row">
-        <div class="col-6 col-md-2">
+        <div class="col-6 col-md-4">
            <label class="card-title">Número da Turma</label>
                <input type='number' class="form-control" name="titulo" />
-        </div>  
-        <div class="col-6 col-md-2">
-           <label class="card-title">Ano</label>
-               <input type='number' class="form-control" name="titulo" />
-        </div>  
-        <div class="col-6 col-md-2">
-           <label class="card-title">Serviço</label>
-               <input type='number' class="form-control" name="titulo" />
-        </div>  
-        <div class="col-6 col-md-2">
-           <label class="card-title">Série</label>
-               <input type='number' class="form-control" name="titulo" />
         </div>      
-        <div class="col-6 col-md-2">
-           <label class="card-title">Disciplina</label>
-               <input type='number' class="form-control" name="titulo" />
-        </div>    
       </div>
  
       <br />
@@ -86,7 +66,7 @@ if(isset($_POST['titulo']) && empty($_POST['titulo']) == false) {
             
   <div class="col-sm-3">
     <div class="card mb-3">
-  <h5 class="card-header">Turma <?php echo $turma["titulo"]; ?>  
+  <h5 class="card-header">Disciplina <?php echo $turma["titulo"]; ?>  
      <a onclick="return confirmDelete()" 
      data-toggle="tooltip" title="Remover Turma <?php  echo $turma["titulo"]; ?>" class="btn btn-danger btn-sm pull-right" 
      href="turma-excluir.php?id=<?php echo $turma["id"]; ?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a> 

@@ -101,7 +101,7 @@ Cadastrado com sucesso
 
 <?php if(count($alunos->getAlunos()) > 0) { ?>
   <div class="row">
-   <table class="table table-striped bg-white text-center">
+   <table class="table table-striped bg-white text-center table-alunos">
   <thead>
     <tr>
       <th scope="col">ID</th>
@@ -138,7 +138,7 @@ Cadastrado com sucesso
      </td>
      <td><a href="<?= BASE; ?>/aluno-editar.php?id=<?php echo $alu["id"]; ?>" data-toggle="tooltip" title="Editar <?php echo $alu["nome"]; ?>"
      class="btn btn-info btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-     <a href="<?= BASE; ?>/aluno-excluir.php?id=<?php echo $alu["id"]; ?>" data-toggle="tooltip" title="Remover <?php echo $alu["nome"]; ?>"
+     <a onclick="return confirmDelete()" href="<?= BASE; ?>/aluno-excluir.php?id=<?php echo $alu["id"]; ?>" data-toggle="tooltip" title="Remover <?php echo $alu["nome"]; ?>"
      class="btn btn-danger btn-sm"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
     </tr>   
     <?php endforeach; ?>    

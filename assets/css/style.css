@@ -87,3 +87,11 @@ main {
     padding: 30px;
     border-radius: 4%;
 }
+
+.table-alunos {
+    font-size: 14px;
+}
+
+.width-size {
+    width: 140px;
+}
