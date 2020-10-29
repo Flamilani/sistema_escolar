@@ -23,6 +23,11 @@ if(isset($_POST['aluno_id']) && !empty($_POST['aluno_id'])) {
 </div>
 <?php } 
 
+if (isset($_SESSION['turma_aluno_del']) && !empty($_SESSION['turma_aluno_del'])) {
+  echo $_SESSION['turma_aluno_del'];
+  unset($_SESSION['turma_aluno_del']);
+ }
+
 require('classes/turmas.class.php');           
 $tur = new Turmas();
 
